@@ -1,0 +1,122 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>ajaxUpload</title>
+    <script type="text/javascript" language="javascript" src="assets/jquery-1.11.3.min.js"></script>
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+    <link rel="stylesheet" type="text/css" href="assets/style.css">
+    <link rel="stylesheet" type="text/css" href="../dist/css/ajaxupload.css" />
+    <script type="text/javascript" language="javascript" src="../dist/ajaxupload.js"></script>
+    <script>
+    $(document).ready(function() {
+        $("#ajaxupload1").ajaxUpload({
+            fileTypes: ['jpg', 'jpeg', 'png', 'gif'],
+            maxSize: 2048
+        });
+
+        var ajaxUpload = $("#ajaxupload2").ajaxUpload({
+            fileTypes: ['jpg', 'jpeg', 'png', 'gif'],
+            maxSize: 2048,
+            text_DropIndicator: "<span class=\"centerdialog\">Yes mate, just put them here, not the one above.</span>",
+            text_InvalidFileType: "Are you crazy mate? .[extension] is a horrible file extension, I can't allow that...",
+            text_DescriptionPlaceHolder: "Write down a description mate.",
+        });
+        ajaxUpload.on("ajaxUpload:FileAdd", function(ID, TheFile, File) {
+            console.log("New file.. " + TheFile + " - " + File.name);
+        });
+
+        $("#submit2").on("click", function(e) {
+            e.preventDefault();
+            var Output = "Here's your file list:\n";
+            $.each(ajaxUpload.files(), function(index, file) {
+                Output += file.filename + " (" + Math.round(file.size / 1024) + "kb)\n";
+            });
+            alert(Output);
+        });
+    });
+    </script>
+</head>
+
+<body>
+    <div id="container">
+        <div id="head">
+            <a class="nounderline" href="/ajaxupload"><h1 class="title">ajaxUpload</h1></a>
+            <ul id="menu">
+                <li><a href="index.html">Introduction</a></li>
+                <li><a href="demos.html" class="active">Demos</a></li>
+                <li><a href="documentation.html">Documentation</a></li>
+            </ul>
+        </div>
+        <div id="content">
+            <h1>Demos</h1>
+            <h2>Image uploader with a max file size of 2 mb's</h2>
+            <h4>JS</h4>
+            <code class="prettyprint">
+                $(document).ready(function() {<br>
+                    <span class="tab"></span>$("#ajaxupload1").ajaxUpload(<br>
+                    <span class="tab"></span><span class="tab"></span>{<br>
+                    <span class="tab"></span><span class="tab"></span><span class="tab"></span>fileTypes: ['jpg','jpeg','png','gif'],<br>
+                    <span class="tab"></span><span class="tab"></span><span class="tab"></span>maxSize: 2048<br>
+                    <span class="tab"></span><span class="tab"></span>}<br>
+                    <span class="tab"></span>);<br>
+                });
+            </code>
+            <h4>HTML</h4>
+            <code class="prettyprint">
+                &lt;form action=&quot;ajaxupload/script/uploadHandler.php&quot; id=&quot;form1&quot;&gt;<br>
+                <span class="tab"></span>&lt;div id=&quot;ajaxupload1&quot; class=&quot;ajaxupload&quot;&gt;&lt;/div&gt;<br>
+                &lt;/form&gt;
+            </code>
+            <form action="ajaxupload/script/uploadHandler.php" id="form1">
+                <div id="ajaxupload1" class="ajaxupload"></div>
+            </form>
+            <h2>Image uploader with a custom placeholder, drag indicator, some custom feedback text, and a file list hook.</h2>
+            <h4>JS</h4>
+            <code class="prettyprint">
+                $(document).ready(function() {<br>
+                    <span class="tab"></span>var ajaxUpload = $("#ajaxupload2").ajaxUpload(<br>
+                    <span class="tab"></span><span class="tab"></span>{<br>
+                    <span class="tab"></span><span class="tab"></span><span class="tab"></span>fileTypes: ['jpg','jpeg','png','gif'],<br>
+                    <span class="tab"></span><span class="tab"></span><span class="tab"></span>maxSize: 2048<br>
+                    <span class="tab"></span><span class="tab"></span><span class="tab"></span>text_DropIndicator: &quot;&lt;span class=\&quot;centerdialog\&quot;&gt;Yes mate, just put them here, not the one above.&lt;/span&gt;&quot;,<br>
+                    <span class="tab"></span><span class="tab"></span><span class="tab"></span>text_InvalidFileType: &quot;Are you crazy mate? .[extension] is a horrible file extension, I can't allow that...&quot;,<br>
+                    <span class="tab"></span><span class="tab"></span><span class="tab"></span>text_DescriptionPlaceHolder: &quot;Write down a description mate.&quot;,<br>
+                    <span class="tab"></span><span class="tab"></span>}<br>
+                    <span class="tab"></span>);<br>
+                    
+                    <span class="tab"></span>$("#submit2").on("click", function(e){<br>
+                    <span class="tab"></span><span class="tab"></span>e.preventDefault();<br>
+                    <span class="tab"></span><span class="tab"></span>var Output = "Here's your file list:\n";<br>
+                    <span class="tab"></span><span class="tab"></span>$.each(ajaxUpload.files(), function(index, file)<br>
+                    <span class="tab"></span><span class="tab"></span>{<br>
+                    <span class="tab"></span><span class="tab"></span><span class="tab"></span>Output += file.filename+" ("+Math.round(file.size/1024)+"kb)\n";<br>
+                    <span class="tab"></span><span class="tab"></span>});<br>
+                    <span class="tab"></span><span class="tab"></span>alert(Output);<br>
+                    <span class="tab"></span>});<br>
+                });
+            </code>
+            <h4>HTML</h4>
+            <code class="prettyprint">
+                &lt;form action=&quot;ajaxupload/script/uploadHandler.php&quot; id=&quot;form2&quot;&gt;<br>
+                <span class="tab"></span>&lt;div id=&quot;ajaxupload2&quot; class=&quot;ajaxupload&quot;&gt;<br>
+                <span class="tab"></span><span class="tab"></span>&lt;div style=&quot;height:47px; text-align:center; position:relative; top:50%; margin-top:-24px;&quot;&gt;&lt;img src=&quot;http://www.ozroundtable.com/Smileys/classic/duckquack.gif&quot; style=&quot;vertical-align:middle&quot; /&gt; Drag files here &lt;strong style=&quot;color:#DC0003&quot;&gt;&amp;lt;3&lt;/strong&gt;&lt;/div&gt;<br>
+                <span class="tab"></span>&lt;/div&gt;<br>
+                <span class="tab"></span>&lt;input type=&quot;submit&quot; id=&quot;submit2&quot; value=&quot;SUBMIT&quot; /&gt;<br>
+            &lt;/form&gt;
+            </code>
+            <form action="ajaxupload/script/uploadHandler.php" id="form2">
+                <div id="ajaxupload2" class="ajaxupload">
+                    <div style="height:47px; text-align:center; position:relative; top:50%; margin-top:-24px;"><img src="http://www.ozroundtable.com/Smileys/classic/duckquack.gif" style="vertical-align:middle" /> Drag files here <strong style="color:#DC0003">&lt;3</strong></div>
+                </div>
+                <input type="submit" id="submit2" value="SUBMIT" />
+            </form>
+        </div>
+        <div id="footer">
+            2016, Yunus TABAKOĞLU
+        </div>
+    </div>
+</body>
+
+</html>

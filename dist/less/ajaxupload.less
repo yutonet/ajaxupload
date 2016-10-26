@@ -1,0 +1,318 @@
+/*
+	AjaxUpload script stylesheet by Yunus Tabakoğlu
+	Version: 0.0.1 (Development Version)
+*/
+
+@ajaxUpload_ImgDir: "../img/";
+@ajaxUpload_IconDir: "../img/filetypes/icon_file_";
+@ajaxUpload_BG: #EFEFEF;
+@ajaxUpload_BG_Hover: darken(@ajaxUpload_BG, 5%);
+@ajaxUpload_Border: darken(@ajaxUpload_BG, 15%);
+@ajaxUpload_Item: darken(@ajaxUpload_BG, 10%);
+@ajaxUpload_PositiveColor: #97D397;
+@ajaxUpload_PositiveColor_Hover: lighten(@ajaxUpload_PositiveColor, 10%);
+@ajaxUpload_NegativeColor: #C1272D;
+@ajaxUpload_NegativeColor_Hover: lighten(@ajaxUpload_NegativeColor, 10%);
+@ajaxUpload_FileWidth: 150px;
+@ajaxUpload_FileHeight: 235px;
+@ajaxUpload_FilePadding: 5px;
+@ajaxUpload_FileMargin: 5px;
+// Presets
+.ajaxUpload_Radius(@radius) {
+    -webkit-border-radius: @radius;
+    -moz-border-radius: @radius;
+    border-radius: @radius;
+}
+
+.ajaxUpload_Opacity(@opacity) {
+    opacity: @opacity;
+    -moz-opacity: @opacity;
+    -webkit-opacity: @opacity;
+}
+
+.ajaxUpload_Transition_Time(@time) {
+    transition: @time ease-in-out;
+}
+
+.ajaxUpload_Transition_Var(...) {
+    transition: @arguments;
+    -webkit-transition: @arguments;
+    -moz-transition: @arguments;
+    -o-transition: @arguments;
+}
+
+// Rest
+div.ajaxUpload_Base {
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border: 1px solid @ajaxUpload_Border;
+    background: @ajaxUpload_BG;
+    padding: 10px;
+    cursor: pointer;
+    position: relative;
+    height: 255px;
+    overflow: hidden;
+    &:hover {
+        background: @ajaxUpload_BG_Hover;
+    }
+    .dragIndicator {
+        display: none;
+        background:url("@{ajaxUpload_ImgDir}bg_dragindicator.png");
+        position: absolute;
+        left: 5px;
+        right: 5px;
+        top: 5px;
+        bottom: 5px;
+        border-radius: 10px;
+        border: 3px dashed @ajaxUpload_Border;
+        z-index: 30;
+    }
+    &.dragto .dragIndicator {
+        display: block;
+    }
+    div.placeHolder {
+        z-index: 20;
+        position: absolute;
+        left: 5px;
+        right: 5px;
+        top: 5px;
+        bottom: 5px;
+    }
+    .ajaxUploadDialog {
+        span.centerdialog {
+            position: absolute;
+            width: 100%;
+            top: 50%;
+            margin-top: -20px;
+            height: 40px;
+            display: block;
+            line-height: 40px;
+            text-align: center;
+            font-weight: 700;
+            color: @ajaxUpload_PositiveColor;
+            div.addicon {
+                display: inline-block;
+                margin: 0 10px;
+                width: 40px;
+                height: 40px;
+                background-image:url("@{ajaxUpload_ImgDir}icon_add.png");
+                vertical-align: middle;
+                background-size: 100%;
+            }
+        }
+    }
+    div.files {
+        z-index: 10;
+        position: absolute;
+        left: 10px;
+        right: 10px;
+        bottom: 10px;
+        top: 10px;
+        overflow: auto;
+        div.file {
+            position: relative;
+            width: @ajaxUpload_FileWidth;
+            height: @ajaxUpload_FileHeight;
+            display: inline-block;
+            margin: @ajaxUpload_FileMargin;
+            padding: @ajaxUpload_FilePadding;
+            background-color: @ajaxUpload_Item;
+            .ajaxUpload_Opacity(1);
+            .ajaxUpload_Radius(5px);
+            .ajaxUpload_Transition_Var(opacity 0.5s,
+            background-color 0.5s);
+            span.name {
+                display: block;
+                font-size: 70%;
+                margin: 4px 0;
+                height: 15px;
+                max-height: 15px;
+                line-height: 15px;
+                max-width: 100%;
+                overflow: hidden;
+            }
+            .thumb {
+                width: 150px;
+                height: 150px;
+                background-color: #FFF;
+                background-position: center center;
+                background-size: cover;
+                box-shadow: 0 0 1px 1px rgba(0, 0, 0, .3);
+                -webkit-box-shadow: 0 0 1px 1px rgba(0, 0, 0, .3);
+                display: inline-block;
+                background-image:url("@{ajaxUpload_ImgDir}icon_defaultfile.png");
+            }
+            div.progressBar {
+                position: absolute;
+                bottom: 5px;
+                left: 5px;
+                right: 5px;
+                height: 15px;
+                background-color: @ajaxUpload_BG;
+                overflow: hidden;
+                border-bottom-right-radius: 5px;
+                border-bottom-left-radius: 5px;
+                -moz-border-radius-bottomleft: 5px;
+                -moz-border-radius-bottomright: 5px;
+                -webkit-border-bottom-left-radius: 5px;
+                -webkit-border-bottom-right-radius: 5px;
+                div.progress {
+                    position: absolute;
+                    left: 0px;
+                    top: 0px;
+                    bottom: 0px;
+                    background-color: @ajaxUpload_PositiveColor;
+                    width: 1%;
+                    .ajaxUpload_Transition_Var(width 0.5s linear);
+                }
+            }
+            .description {
+                font-family: "Gill Sans", "Gill Sans MT", "Myriad Pro", "DejaVu Sans Condensed", Helvetica, Arial, sans-serif;
+                width: 140px;
+                max-width: 140px;
+                min-width: 140px;
+                height: 45px;
+                max-height: 45px;
+                min-height: 45px;
+                border: none;
+                color: #000;
+                padding: 5px;
+                font-size: 13px;
+                resize: none;
+                line-height: 15px;
+                border-radius: 5px;
+                -moz-border-radius: 5px;
+                -webkit-border-radius: 5px;
+            }
+            .button_Remove {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                background-color: @ajaxUpload_NegativeColor;
+                color: #FFF;
+                padding: 3px;
+                font-weight: bold;
+                min-height: 15px;
+                min-width: 15px;
+                border-radius: 3px;
+                -moz-border-radius: 3px;
+                -webkit-border-radius: 3px;
+                &:hover {
+                    background-color: @ajaxUpload_NegativeColor_Hover;
+                }
+                &.image {
+                    background-image:url("@{ajaxUpload_ImgDir}icon_delete.png");
+                    background-position: 3px 3px;
+                    background-repeat: no-repeat;
+                    background-size: 15px auto;
+                }
+            }
+            &.uploaded {
+                background-color: @ajaxUpload_PositiveColor;
+            }
+            &.failed {
+                background-color: @ajaxUpload_NegativeColor;
+            }
+        }
+    }
+}
+
+input.ajaxUpload_hiddenFile {
+    position: absolute;
+    top: -1000px;
+    left: -2500px;
+}
+
+
+/* Animation */
+
+.fadeIn {
+    .ajaxUpload_Opacity(0);
+    animation: animation-fadein .3s ease-in-out forwards;
+}
+
+.fadeOut {
+    .ajaxUpload_Opacity(1);
+    animation: animation-fadeout .3s ease-in-out forwards;
+}
+
+.slideLeft {
+    animation: animation-slideleft .3s ease-in-out forwards;
+}
+
+@keyframes animation-fadein {
+    from {
+        .ajaxUpload_Opacity(0);
+    }
+    to {
+        .ajaxUpload_Opacity(1);
+    }
+}
+
+@keyframes animation-fadeout {
+    from {
+        .ajaxUpload_Opacity(1);
+    }
+    to {
+        .ajaxUpload_Opacity(0);
+    }
+}
+
+@keyframes animation-slideleft {
+    from {
+        margin-left: 0;
+    }
+    to {
+        margin-left: (@ajaxUpload_FileWidth+(@ajaxUpload_FilePadding*2)+@ajaxUpload_FileMargin)*-1;
+    }
+}
+
+
+/* CSS Icons */
+
+div.ajaxUpload_Base.cssIcons div.files div.file[filetype="tif"] .thumb {
+    background-image:url("@{ajaxUpload_IconDir}tif.png");
+}
+
+div.ajaxUpload_Base.cssIcons div.files div.file[filetype="zip"] .thumb {
+    background-image:url("@{ajaxUpload_IconDir}zip.png");
+}
+
+div.ajaxUpload_Base.cssIcons div.files div.file[filetype="rar"] .thumb {
+    background-image:url("@{ajaxUpload_IconDir}rar.png");
+}
+
+div.ajaxUpload_Base.cssIcons div.files div.file[filetype="psd"] .thumb {
+    background-image:url("@{ajaxUpload_IconDir}psd.png");
+}
+
+div.ajaxUpload_Base.cssIcons div.files div.file[filetype="ai"] .thumb {
+    background-image:url("@{ajaxUpload_IconDir}ai.png");
+}
+
+div.ajaxUpload_Base.cssIcons div.files div.file[filetype="id"] .thumb {
+    background-image:url("@{ajaxUpload_IconDir}id.png");
+}
+
+div.ajaxUpload_Base.cssIcons div.files div.file[filetype="pdf"] .thumb {
+    background-image:url("@{ajaxUpload_IconDir}pdf.png");
+}
+
+div.ajaxUpload_Base.cssIcons div.files div.file[filetype="mp3"] .thumb {
+    background-image:url("@{ajaxUpload_IconDir}mp3.png");
+}
+
+div.ajaxUpload_Base.cssIcons div.files div.file[filetype="wav"] .thumb {
+    background-image:url("@{ajaxUpload_IconDir}wav.png");
+}
+
+@media (-webkit-min-device-pixel-ratio: 2),
+(min-resolution: 192dpi) {
+    div.ajaxUpload_Base .ajaxUploadDialog span.centerdialog div.addicon {
+        background-image:url("@{ajaxUpload_ImgDir}icon_add@2x.png");
+    }
+    div.ajaxUpload_Base div.files div.file .button_Remove.image {
+        background-image:url("@{ajaxUpload_ImgDir}icon_delete@2x.png");
+    }
+}

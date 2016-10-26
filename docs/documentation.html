@@ -1,0 +1,302 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>ajaxUpload</title>
+    <script type="text/javascript" language="javascript" src="assets/jquery-1.11.3.min.js"></script>
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+    <link rel="stylesheet" type="text/css" href="assets/style.css">
+    <link rel="stylesheet" type="text/css" href="../dist/css/ajaxupload.css" />
+    <script type="text/javascript" language="javascript" src="../dist/ajaxupload.js"></script>
+    <script>
+    $(document).ready(function() {
+        $(".ajaxupload").ajaxUpload({
+            fileTypes: ['jpg', 'jpeg', 'png', 'tiff', 'tif', 'bmp', 'gif'],
+            maxSize: 2048
+        });
+    });
+    </script>
+</head>
+
+<body>
+    <div id="container">
+        <div id="head">
+            <a class="nounderline" href="/ajaxupload"><h1 class="title">ajaxUpload</h1></a>
+            <ul id="menu">
+                <li><a href="index.html">Introduction</a></li>
+                <li><a href="demos.html">Demos</a></li>
+                <li><a href="documentation.html" class="active">Documentation</a></li>
+            </ul>
+        </div>
+        <div id="content">
+            <h1>Documentation</h1>
+            <h2>Index</h2>
+            <ol>
+                <li><a href="#section-settings">Settings (&amp;Defaults)</a></li>
+                <li><a href="#section-events">Events</a></li>
+                <li><a href="#section-functions">Functions</a></li>
+            </ol>
+            <h2 id="section-settings">Settings (&amp;Defaults)</h2>
+            <table class="desc">
+                <tr>
+                    <th>Setting</th>
+                    <th>Default</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td class="code">debug</td>
+                    <td>true (boolean)</td>
+                    <td class="desc">Whether errors to be printed out on the console or not.</td>
+                </tr>
+                <tr>
+                    <td class="code">fileTypes</td>
+                    <td>[] (array)</td>
+                    <td class="desc">Array of extension strings (&quot;jpg&quot;, &quot;pdf&quot;, &quot;etc&quot;)</td>
+                </tr>
+                <tr>
+                    <td class="code">uploadHandler</td>
+                    <td>scriptFolder+&quot;uploadHandler.php&quot;</td>
+                    <td class="desc">Backend script url. (scriptFolder variable returns the url of the script.</td>
+                </tr>
+                <tr>
+                    <td class="code">preventDuplicates</td>
+                    <td>true (boolean)</td>
+                    <td class="desc">Prevents the same file to be uploaded when true.</td>
+                </tr>
+                <tr>
+                    <td class="code">description</td>
+                    <td>true (boolean)</td>
+                    <td class="desc">Activates/deactivates the description area.</td>
+                </tr>
+                <tr>
+                    <td class="code">formSelector</td>
+                    <td> &quot;&quot; (string)</td>
+                    <td class="desc">Custom form selector to be hooked to. Parent form is the default (Empty string).</td>
+                </tr>
+                <tr>
+                    <td class="code">deleteText</td>
+                    <td> &quot;&quot; (string)</td>
+                    <td class="desc">String for the delete button. Image by default (Empty string).</td>
+                </tr>
+                <tr>
+                    <td class="code">maxFiles</td>
+                    <td>10 (integer)</td>
+                    <td class="desc">Maximum amount of files allowed on the files list. (0 is unlimited)</td>
+                </tr>
+                <tr>
+                    <td class="code">maxSize</td>
+                    <td>0 (integer)</td>
+                    <td class="desc">Maximum file size to be uploaded. (In kilobytes, 0 is unlimited)</td>
+                </tr>
+                <tr>
+                    <td class="code">cssIcons</td>
+                    <td>true (boolean)</td>
+                    <td class="desc">File icons defined by the css file when true. If not, script checks the filetypes folder (/img/filetypes) for the uploaded filetype image.</td>
+                </tr>
+                <tr>
+                    <td class="code">allowDrop</td>
+                    <td>false (boolean)</td>
+                    <td class="desc">Prevents dropping on objects other than uploader. Must be called false in all instances of ajaxUpload (if more than one) to prevent, true overrides all.</td>
+                </tr>
+                <tr>
+                    <td class="code">triggerCommandOnRemove</td>
+                    <td>true (boolean)</td>
+                    <td class="desc">If true, sends a trigger to the upload handler script when a file gets removed from the interface.</td>
+                </tr>
+                <tr>
+                    <td class="code">injectType</td>
+                    <td>&quot;array&quot; (string)</td>
+                    <td class="desc">Either &quot;array&quot; (default) or &quot;indexed&quot;. Defines how ajaxUpload injects file data to the parent form. (See: Submitting forms)</td>
+                </tr>
+                <tr>
+                    <th colspan="3" class="center">Backend Handler Command Prefixes</th>
+                </tr>
+                <tr>
+                    <td class="code">handler_CommandKey</td>
+                    <td>&quot;command&quot; (string)</td>
+                    <td class="desc">Backend post key for the upload handler command.
+                        <br><i>In PHP, the command is stored in the object "$_POST["command"]" by default.</i></td>
+                </tr>
+                <tr>
+                    <td class="code">handler_uploadCommand</td>
+                    <td>&quot;ajaxUploadSingle&quot; (string)</td>
+                    <td class="desc">Command name for upload.
+                        <br><i>In PHP, upload command in the object "$_POST["command"]" is "ajaxUploadSingle" by default.</i></td>
+                </tr>
+                <tr>
+                    <td class="code">handler_removeCommand</td>
+                    <td>&quot;ajaxRemoveSingle&quot; (string)</td>
+                    <td class="desc">Command for removal.
+                        <br><i>In PHP, remove command in the object "$_POST["command"]" is "ajaxRemoveSingle" by default.</i></td>
+                </tr>
+                <tr>
+                    <td class="code">handler_removeKey</td>
+                    <td>&quot;fileToRemove&quot; (string)</td>
+                    <td class="desc">Backend post key for the file to be removed.
+                        <br><i>In PHP, the removal data is stored in the object "$_POST["fileToRemove"]" by default.</i></td>
+                </tr>
+                <tr>
+                    <td class="code">handler_removeSelector</td>
+                    <td>&quot;filename&quot; (string)</td>
+                    <td class="desc">Backend post data for the file to be removed.
+                        <br><i>Must be a key string from the "data" object sent by the backend script.</i></td>
+                </tr>
+                <tr>
+                    <td class="code">handler_fileKey</td>
+                    <td>&quot;file&quot; (string)</td>
+                    <td class="desc">Post key for the file object sent to the backend handler.</td>
+                </tr>
+                <tr>
+                    <th colspan="3" class="center">Injection Properties</th>
+                </tr>
+                <tr>
+                    <td class="code">inputClass</td>
+                    <td>&quot;ajaxUpload_Input&quot; (string)</td>
+                    <td class="desc">Class of the inputs to be injected to the form.</td>
+                </tr>
+                <tr>
+                    <td class="code">formPrefix</td>
+                    <td>&quot;ajaxUpload_&quot; (string)</td>
+                    <td class="desc">ID and name prefix for the inputs to be injected to the form.</td>
+                </tr>
+                <tr>
+                    <td class="code">formKeySeperator</td>
+                    <td>&quot;_&quot; (string)</td>
+                    <td class="desc">This variable seperates the file key and the file data key in the injected elements. Only applicable in the "indexed" injection mode.
+                        <br>
+                        <i>By default, in the indexed form, the key "description" for the file "file115" is stored in the input name as "ajaxUpload_file115<b>_</b>description". "_" between the file key and the attribute key is formKeySeperator variable.</i></td>
+                </tr>
+                <tr>
+                    <td class="code">fileIDPrefix</td>
+                    <td>&quot;file&quot; (string)</td>
+                    <td class="desc">Prefix for the file ID. This is the prefix for the main selector of the uploaded files.</td>
+                </tr>
+                <tr>
+                    <td class="code">DescriptionKey</td>
+                    <td>&quot;description&quot; (string)</td>
+                    <td class="desc">Key for the description field to be appended to the "data" object of the file.</td>
+                </tr>
+                <tr>
+                    <td class="code">inputName_FileList</td>
+                    <td>&quot;files&quot; (string)</td>
+                    <td class="desc">Input name for the file list input array. Each file id uploaded will be appended to the form with the name "ajaxUpload_files[]" by default.</td>
+                </tr>
+                <tr>
+                    <th colspan="3" class="center">Interface Text Properties</th>
+                </tr>
+                <tr>
+                    <td class="code">text_DescriptionPlaceHolder</td>
+                    <td>&quot;Enter description here.&quot; (string)</td>
+                    <td class="desc">Placeholder text for the description field.</td>
+                </tr>
+                <tr>
+                    <td class="code">text_PlaceHolder</td>
+                    <td>&quot;&lt;span class=&quot;centerdialog&quot;&gt;&lt;div class=&quot;addicon&quot;&gt;&lt;/div&gt;Add your files here...&lt;/span&gt;&quot; (string)</td>
+                    <td class="desc">Placeholder text for empty ajaxUploader object.</td>
+                </tr>
+                <tr>
+                    <td class="code">text_DropIndicator</td>
+                    <td>&quot;&lt;span class=&quot;centerdialog&quot;&gt;Yes, drop them up here...&lt;/span&gt;&quot; (string)</td>
+                    <td class="desc">Drop indicator text. (Appears when user starts dragging)</td>
+                </tr>
+                <tr>
+                    <td class="code">text_MaxFileCountExceeded</td>
+                    <td>&quot;You can't upload more than [maxFiles] files.&quot; (string)</td>
+                    <td class="desc">Warning text for exceeding the file quantity limit.
+                        <br><i>Use "[maxFiles]" as a variable to print the file quantity limit.</i></td>
+                </tr>
+                <tr>
+                    <td class="code">text_MaxFileSizeExceeded</td>
+                    <td>&quot;The file [filename] exceeds the maximum file size ([maxSize]kb).&quot; (string)</td>
+                    <td class="desc">Warning text for exceeding the file size limit.
+                        <br><i>Use "[maxSize]" as a variable to print the file quantity limit.<br>Use "[filename]" as  a variable to print the name of the file that exceeds the limit.</i></td>
+                </tr>
+                <tr>
+                    <td class="code">text_InvalidFileType</td>
+                    <td>&quot;The file extension &quot;.[extension]&quot; is not permitted.&quot; (string)</td>
+                    <td class="desc">Warning text for restricted file types.
+                        <br><i>Use "[extension]" as a variable to print the forbidden file extension mentioned.</i></td>
+                </tr>
+                <tr>
+                    <td class="code">text_FileIsDuplicate</td>
+                    <td>&quot;The file &quot;[filename]&quot; already exists in the uploads list.&quot; (string)</td>
+                    <td class="desc">Warning text for duplicate file.
+                        <br><i>Use "[filename]" as a variable to print the filenmame of the duplicate mentioned.</i></td>
+                </tr>
+            </table>
+            <h2 id="section-events">Events</h2>
+            <table class="desc">
+                <tr>
+                    <th>Event</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td class="code">ajaxUpload:UploadComplete</td>
+                    <td class="desc">Fires when an upload is complete.
+                        <br>Returns file ID and the file object.</td>
+                </tr>
+                <tr>
+                    <td class="code">ajaxUpload:UploadAbort</td>
+                    <td class="desc">Fires when an upload is aborted by the user.
+                        <br>Returns file ID and the file object.</td>
+                </tr>
+                <tr>
+                    <td class="code">ajaxUpload:UploadError</td>
+                    <td class="desc">Fires when an error occurs on the upload process.
+                        <br>Returns file ID, file, error type ("expected" or "unexpected"), error side ("server" or "ajax") and error text or the server side result data.</td>
+                </tr>
+                <tr>
+                    <td class="code">ajaxUpload:FileAdd</td>
+                    <td class="desc">Fires when a file is added.
+                        <br>Returns file ID and the file object.</td>
+                </tr>
+                <tr>
+                    <td class="code">ajaxUpload:FileRemove</td>
+                    <td class="desc">Fires when user removes a file from the list.
+                        <br>Returns file ID and the file object.</td>
+                </tr>
+            </table>
+            <h3>Hooking Events</h3> Events can easily be hooked with the jQuery "on" command:
+            <code class="prettyprint">
+                var ajaxUpload = $("#ajaxupload").ajaxUpload(); //Execute the ajaxUpload on the object with the id "ajaxupload"<br>
+                AjaxUpload.on(<br>
+                <span class="tab"></span>"ajaxUpload:FileAdd",<br>
+                <span class="tab"></span>function(event, FileID, File) //Second argument returns the file's identifier ID as a string. Second one is the javascript <a href="https://developer.mozilla.org/en-US/docs/Web/API/File" target="_blank">File object</a> which will be sent over ajax to the backend script later.<br>
+                <span class="tab"></span>{<br>
+                <span class="tab"></span><span class="tab"></span>console.log("New file: " + ID + " (" + File.name + ")");<br>
+                <span class="tab"></span>}<br>
+                );
+            </code>
+            <h2 id="section-functions">Functions</h2>
+            <table class="desc">
+                <tr>
+                    <th>Function</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td class="code">deleteFile(File)</td>
+                    <td class="desc">Deletes File (File variable should be either the file ID, or the dom object for the file with the class ".file"</td>
+                </tr>
+                <tr>
+                    <td class="code">Files()</td>
+                    <td class="desc">Returns the array of files. Array structure is as follows:
+                        <code class="prettyprint">
+                            {<br>
+                                <span class="tab"></span>"filename" = "string" //name of file (no directory included),<br>
+                                <span class="tab"></span>"size" = int //size of the file,<br>
+                                <span class="tab"></span>"complete" = bool //indicates if file upload is complete.<br>
+                                <span class="tab"></span>"data" = object //data object returned from the backend function.<br>
+                            }<br>
+                        </code>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div id="footer">
+            2016, Yunus TABAKOĞLU
+        </div>
+    </div>
+</body>
+
+</html>
