@@ -2,59 +2,61 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
-    <title>ajaxUpload</title>
-    <script type="text/javascript" language="javascript" src="assets/jquery-1.11.3.min.js"></script>
-    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
-    <link rel="stylesheet" type="text/css" href="assets/style.css">
-    <link rel="stylesheet" type="text/css" href="../dist/css/ajaxupload.css" />
-    <script type="text/javascript" language="javascript" src="../dist/ajaxupload.js"></script>
-    <script>
-    $(document).ready(function() {
-        $(".ajaxupload").ajaxUpload({
-            fileTypes: ['jpg', 'jpeg', 'png', 'tiff', 'tif', 'bmp', 'gif'],
-            maxSize: 2048
-        });
-    });
-    </script>
+	<meta charset="utf-8">
+	<title>ajaxUpload</title>
+	<script type="text/javascript" language="javascript" src="assets/jquery-1.11.3.min.js"></script>
+	<script src="assets/prism.js"></script>
+	<link rel="stylesheet" type="text/css" href="assets/prism.css">
+	<link rel="stylesheet" type="text/css" href="assets/style.css">
+	
+	<link rel="stylesheet" type="text/css" href="../dist/css/ajaxupload.css" />
+	<script type="text/javascript" language="javascript" src="../dist/ajaxupload.js"></script>
+	<script>
+	$(document).ready(function() {
+		$(".ajaxupload").ajaxUpload({
+			fileTypes: ['jpg', 'jpeg', 'png', 'tiff', 'tif', 'bmp', 'gif'],
+			maxSize: 2048
+		});
+	});
+	</script>
 </head>
 
 <body>
-    <div id="container">
-        <div id="head">
-            <a class="nounderline" href="/ajaxupload"><h1 class="title">ajaxUpload</h1></a>
-            <ul id="menu">
-                <li><a href="index.html" class="active">Introduction</a></li>
-                <li><a href="demos.html">Demos</a></li>
-                <li><a href="documentation.html">Documentation</a></li>
-            </ul>
-        </div>
-        <div id="content">
-            <div class="caption"><strong>ajaxUpload</strong> is a simple yet functional and highly customizable jQuery plugin that allows you to upload files asynchronously.</div>
-            <ul>
-                <li>It's very <strong>simple to implement</strong></li>
-                <li>It's highly <strong>customizable</strong></li>
-                <li>
-                    It has a very <strong>flexible backend implementation</strong>
-                    <p>You can store any file-related data coming from your backend script.</p>
-                </li>
-                <li>It uses <strong>CSS3 animations</strong> for a smoother experience.</li>
-                <li>It has a <strong>LESS markup</strong> that makes it much easier to stylize and modify</li>
-            </ul>
-            <h2>Try it</h2>
-            <code class="prettyprint">
-				$(".ajaxupload").ajaxUpload(<br>
-				<span class="tab"></span>{ fileTypes: ['jpg','jpeg','png','gif'], maxSize: 2048 }<br>
-				);<br>
-				</code>
-            <form action="ajaxupload/script/uploadHandler.php" id="form1">
-                <div class="ajaxupload"></div>
-            </form>
-        </div>
-        <div id="footer">
-            2016, Yunus TABAKOĞLU
-        </div>
-    </div>
+	<div id="container">
+		<div id="head">
+			<a class="nounderline" href="/ajaxupload"><h1 class="title">ajaxUpload</h1></a>
+			<ul id="menu">
+				<li><a href="index.html" class="active">Introduction</a></li>
+				<li><a href="demos.html">Demos</a></li>
+				<li><a href="documentation.html">Documentation</a></li>
+			</ul>
+		</div>
+		<div id="content">
+			<div class="caption"><strong>ajaxUpload</strong> is a simple yet functional and highly customizable jQuery plugin that allows you to upload files asynchronously.</div>
+			<ul>
+				<li>It's very <strong>simple to implement</strong></li>
+				<li>It's highly <strong>customizable</strong></li>
+				<li>
+					It has a very <strong>flexible backend implementation</strong>
+					<p>You can store any file-related data coming from your backend script.</p>
+				</li>
+				<li>It uses <strong>CSS3 animations</strong> for a smoother experience.</li>
+				<li>It has a <strong>LESS markup</strong> that makes it much easier to stylize and modify</li>
+			</ul>
+			<h2>Try it</h2>
+<pre><code class="language-js"><xmp>
+	$(".ajaxupload").ajaxUpload(
+		{ fileTypes: ['jpg','jpeg','png','gif'], maxSize: 2048 }
+	);
+</xmp></code></pre>
+			<form action="../dist/uploadHandler.php" id="form1">
+				<div class="ajaxupload"></div>
+			</form>
+		</div>
+		<div id="footer">
+			2016, Yunus TABAKOĞLU
+		</div>
+	</div>
 </body>
 
 </html>

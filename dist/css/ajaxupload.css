@@ -3,9 +3,6 @@
 	Version: 0.0.1 (Development Version)
 */
 div.ajaxUpload_Base {
-  border-radius: 10px;
-  -moz-border-radius: 10px;
-  -webkit-border-radius: 10px;
   border: 1px solid #c9c9c9;
   background: #EFEFEF;
   padding: 10px;
@@ -25,7 +22,6 @@ div.ajaxUpload_Base .dragIndicator {
   right: 5px;
   top: 5px;
   bottom: 5px;
-  border-radius: 10px;
   border: 3px dashed #c9c9c9;
   z-index: 30;
 }
@@ -81,9 +77,6 @@ div.ajaxUpload_Base div.files div.file {
   opacity: 1;
   -moz-opacity: 1;
   -webkit-opacity: 1;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
   transition: opacity 0.5s background-color 0.5s;
   -webkit-transition: opacity 0.5s background-color 0.5s;
   -moz-transition: opacity 0.5s background-color 0.5s;
@@ -118,12 +111,6 @@ div.ajaxUpload_Base div.files div.file div.progressBar {
   height: 15px;
   background-color: #EFEFEF;
   overflow: hidden;
-  border-bottom-right-radius: 5px;
-  border-bottom-left-radius: 5px;
-  -moz-border-radius-bottomleft: 5px;
-  -moz-border-radius-bottomright: 5px;
-  -webkit-border-bottom-left-radius: 5px;
-  -webkit-border-bottom-right-radius: 5px;
 }
 div.ajaxUpload_Base div.files div.file div.progressBar div.progress {
   position: absolute;
@@ -151,9 +138,6 @@ div.ajaxUpload_Base div.files div.file .description {
   font-size: 13px;
   resize: none;
   line-height: 15px;
-  border-radius: 5px;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
 }
 div.ajaxUpload_Base div.files div.file .button_Remove {
   position: absolute;
@@ -165,9 +149,6 @@ div.ajaxUpload_Base div.files div.file .button_Remove {
   font-weight: bold;
   min-height: 15px;
   min-width: 15px;
-  border-radius: 3px;
-  -moz-border-radius: 3px;
-  -webkit-border-radius: 3px;
 }
 div.ajaxUpload_Base div.files div.file .button_Remove:hover {
   background-color: #d94248;

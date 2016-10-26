@@ -17,13 +17,7 @@
 @ajaxUpload_FileHeight: 235px;
 @ajaxUpload_FilePadding: 5px;
 @ajaxUpload_FileMargin: 5px;
-// Presets
-.ajaxUpload_Radius(@radius) {
-    -webkit-border-radius: @radius;
-    -moz-border-radius: @radius;
-    border-radius: @radius;
-}
-
+// Functions
 .ajaxUpload_Opacity(@opacity) {
     opacity: @opacity;
     -moz-opacity: @opacity;
@@ -43,9 +37,6 @@
 
 // Rest
 div.ajaxUpload_Base {
-    border-radius: 10px;
-    -moz-border-radius: 10px;
-    -webkit-border-radius: 10px;
     border: 1px solid @ajaxUpload_Border;
     background: @ajaxUpload_BG;
     padding: 10px;
@@ -64,7 +55,6 @@ div.ajaxUpload_Base {
         right: 5px;
         top: 5px;
         bottom: 5px;
-        border-radius: 10px;
         border: 3px dashed @ajaxUpload_Border;
         z-index: 30;
     }
@@ -119,7 +109,6 @@ div.ajaxUpload_Base {
             padding: @ajaxUpload_FilePadding;
             background-color: @ajaxUpload_Item;
             .ajaxUpload_Opacity(1);
-            .ajaxUpload_Radius(5px);
             .ajaxUpload_Transition_Var(opacity 0.5s,
             background-color 0.5s);
             span.name {
@@ -151,12 +140,6 @@ div.ajaxUpload_Base {
                 height: 15px;
                 background-color: @ajaxUpload_BG;
                 overflow: hidden;
-                border-bottom-right-radius: 5px;
-                border-bottom-left-radius: 5px;
-                -moz-border-radius-bottomleft: 5px;
-                -moz-border-radius-bottomright: 5px;
-                -webkit-border-bottom-left-radius: 5px;
-                -webkit-border-bottom-right-radius: 5px;
                 div.progress {
                     position: absolute;
                     left: 0px;
@@ -181,9 +164,6 @@ div.ajaxUpload_Base {
                 font-size: 13px;
                 resize: none;
                 line-height: 15px;
-                border-radius: 5px;
-                -moz-border-radius: 5px;
-                -webkit-border-radius: 5px;
             }
             .button_Remove {
                 position: absolute;
@@ -195,9 +175,6 @@ div.ajaxUpload_Base {
                 font-weight: bold;
                 min-height: 15px;
                 min-width: 15px;
-                border-radius: 3px;
-                -moz-border-radius: 3px;
-                -webkit-border-radius: 3px;
                 &:hover {
                     background-color: @ajaxUpload_NegativeColor_Hover;
                 }

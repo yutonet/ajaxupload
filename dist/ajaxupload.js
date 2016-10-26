@@ -65,7 +65,7 @@
 		var settings = $.extend({
 			debug: true, // Prints out errors on the console.
 			fileTypes: [], // Array of extension strings ("jpg", "pdf", "etc")
-			uploadHandler: scriptFolder+"uploadHandler.php", // Backend script url
+			uploadHandler: false, // Backend script url
 			preventDuplicates: true, // Prevents the same file to be uploaded when true.
 			description: true, // Activates/deactivates the description area.
 			formSelector: "", // Custom form to be hooked to. Parent form by default (Empty string).
@@ -118,6 +118,9 @@
 		var UploadedFiles = {};
 		Obj.addClass("ajaxUpload_Base");
 		if(settings.cssIcons){ Obj.addClass("cssIcons"); }
+		if(!settings.uploadHandler){
+			settings.uploadHandler = Obj.closest('form').attr('action');
+		}
 		
 		if($.trim(Obj.html())!==""){ settings.text_PlaceHolder = Obj.html(); }
 		Obj.html("");
@@ -300,7 +303,7 @@
 					{
 						var Values = {};
 						Values[settings.handler_CommandKey] = settings.handler_removeCommand;
-						Values[settings.handler_removeKey] = UploadedFiles[FileID][settings.handler_removeSelector];
+						Values[settings.handler_removeKey] = UploadedFiles[FileID]['data'][settings.handler_removeSelector];
 						$.ajax({
 							url:settings.uploadHandler,
 							type: "POST",
@@ -382,7 +385,6 @@
 				cache: false,
 				data: formData,
 				success: function(data){
-					console.log(data);
 					File = $.parseJSON(data);
 					if(File.status === "ok" && Obj.find(".files #"+fileID).length>0)
 					{

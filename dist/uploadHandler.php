@@ -35,6 +35,8 @@
 	else{ $data = array('status' => 'error', 'error' => 'No input.'); }
 	
 	echo json_encode($data);
+
+	/* Cleans up the older files in the temp directory */
 	Cleanup();
 	
 	
